@@ -1,7 +1,7 @@
 const images = [
   {
     preview:
-      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg",
+      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__340.jpg",
     original:
       "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg",
     description: "Hokkaido Flower",
@@ -69,40 +69,38 @@ const gallery = document.querySelector(".gallery");
 gallery.insertAdjacentHTML("beforeend", createMarkup(images));
 gallery.addEventListener("click", handleImageClick);
 
-function createMarkup(array) {
-  return array
+function createMarkup(arr) {
+  return arr
     .map(
       ({ preview, original, description }) => `
-  <li class="gallery-item">
-    <a class="gallery-link" href="${original}">
-      <img
-        class="gallery-image"
-        src="${preview}"
-        data-source="${original}"
-        alt="${description}"  width = "360" height = "200"
-      />
-    </a>
-  </li>
+ <li class="gallery-item">
+  <a class="gallery-link" href="${original}">
+    <img
+      class="gallery-image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}" width ="360" height ="200"
+    />
+  </a>
+</li>
 `
     )
     .join("");
 }
 
 function handleImageClick(event) {
-  event.preventDefault();
-
   if (event.target === event.currentTarget) {
     return;
   }
 
-  const currentImage = event.target.closest(".gallery-item");
-  console.log(currentImage);
-}
+  const currentImg = event.target.closest(".gallery-item");
+  console.log(currentImg);
 
-const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(`
   <div class="modal">
-  <img src="${images.original}" alt="${images.description}" width ="1112" height = "640"/>
+    <img src="${gallery.original}" alt="${gallery.description}" width ="1112" height = "640"/>
   </div>
   `);
 
-instance.show();
+  instance.show();
+}
