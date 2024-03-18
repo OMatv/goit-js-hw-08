@@ -1,0 +1,14 @@
+.gallery {
+  display: flex;
+  column-gap: 24px;
+  flex-wrap: wrap;
+  row-gap: 24px;
+}
+
+.gallery-item {
+  width: calc((100% - 48px) / 3);
+}
+.modal {
+  display: flex;
+  width: 1280px;
+}
