@@ -79,7 +79,7 @@ function createMarkup(arr) {
       class="gallery-image"
       src="${preview}"
       data-source="${original}"
-      alt="${description}" width ="360" height ="200"
+      alt="${description}" width="360" height="200"
     />
   </a>
 </li>
@@ -89,9 +89,7 @@ function createMarkup(arr) {
 }
 
 function handleImageClick(event) {
-  if (event.target === event.currentTarget) {
-    return;
-  }
+  if (!event.target.classList.contains("gallery-image")) return;
 
   const currentImg = event.target.closest(".gallery-item");
   const originalSrc = currentImg
