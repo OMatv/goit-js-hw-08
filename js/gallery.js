@@ -94,11 +94,16 @@ function handleImageClick(event) {
   }
 
   const currentImg = event.target.closest(".gallery-item");
-  console.log(currentImg);
+  const originalSrc = currentImg
+    .querySelector(".gallery-image")
+    .getAttribute("data-source");
+  const description = currentImg
+    .querySelector(".gallery-image")
+    .getAttribute("alt");
 
   const instance = basicLightbox.create(`
   <div class="modal">
-    <img src="${image.original}" alt="${image.description}" width ="1112" height = "640"/>
+    <img src="${originalSrc}" alt="${description}" width="1112" height="640"/>
   </div>
   `);
 

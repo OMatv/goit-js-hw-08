@@ -13,8 +13,19 @@
 }
 .modal {
   position: absolute;
-
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 1440px;
   height: 696px;
-  background: #2e2f42cc;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  text-align: center;
+}
+
+.modal img {
+  max-width: 90%;
+  max-height: 90%;
+  display: block;
+  margin: auto;
 }
