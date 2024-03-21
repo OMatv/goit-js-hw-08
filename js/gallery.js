@@ -65,45 +65,39 @@ const images = [
 ];
 
 const gallery = document.querySelector(".gallery");
+const hiddenImagesContainer = document.querySelector(".hidden-images");
 
-gallery.insertAdjacentHTML("beforeend", createMarkup(images));
-gallery.addEventListener("click", handleImageClick);
-
-function createMarkup(arr) {
-  return arr
-    .map(
-      ({ preview, original, description }) => `
- <li class="gallery-item">
-  <a class="gallery-link" href="${original}">
-    <img
-      class="gallery-image"
-      src="${preview}"
-      data-source="${original}"
-      alt="${description}" width="360" height="200"
-    />
-  </a>
-</li>
-`
-    )
-    .join("");
+function createGalleryItemMarkup({ preview, original, description }) {
+  return `
+    <li class="gallery-item">
+      <a href="${original}" class="gallery-link">
+        <img
+          class="gallery-image"
+          src="${preview}"
+          alt="${description}"
+          data-source="${original}"
+          width="360"
+          height="200"
+        />
+      </a>
+    </li>
+  `;
 }
 
-function handleImageClick(event) {
-  if (!event.target.classList.contains("gallery-image")) return;
+gallery.innerHTML = images.map(createGalleryItemMarkup).join("");
 
-  const currentImg = event.target.closest(".gallery-item");
-  const originalSrc = currentImg
-    .querySelector(".gallery-image")
-    .getAttribute("data-source");
-  const description = currentImg
-    .querySelector(".gallery-image")
-    .getAttribute("alt");
+gallery.addEventListener("click", (event) => {
+  event.preventDefault();
+  const galleryLink = event.target.closest(".gallery-link");
+  if (galleryLink) {
+    const originalSrc = galleryLink.href;
+    const description = galleryLink.querySelector("img").alt;
 
-  const instance = basicLightbox.create(`
-  <div class="modal">
-    <img src="${originalSrc}" alt="${description}" width="1112" height="640"/>
-  </div>
-  `);
-
-  instance.show();
-}
+    const instance = basicLightbox.create(`
+      <div class="modal">
+        <img src="${originalSrc}" alt="${description}" width="1112" height="640" />
+      </div>
+    `);
+    instance.show();
+  }
+});
